@@ -1,0 +1,77 @@
+<!doctype html>
+
+<html>
+
+<head>
+<title>Sound</title>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js" integrity="sha512-w1Bktzax55ZbjW5Mqjz8+mKz4KqRjEUU35Dpq/ath29yskKqIGwNIHiFNp03m/OiJWDXvdQ1/g6aV+l4PeVO7Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/addons/p5.sound.js" integrity="sha512-U2sgwrFhl+Tgx9iGH9h5Ba2WyIjyCes+D0prtIFw3a0V+/fkaeL5Cd/VjyPHno9kUPE1rnNhBGTyvtZsfJp0xg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+<script>
+
+let mySound;
+let myAmplitude;
+let myFFT;
+
+function preload()
+{
+mySound = loadSound("ambulance.mp3");
+
+}
+function setup()
+{
+createCanvas(400,400);
+myAmplitude = new p5.Amplitude;
+myFFT = new p5.FFT(0.8,16);
+
+}
+
+function draw()
+{
+background(220);
+//Sound FFT
+let spectrum = myFFT.analyze();
+let w = width/spectrum.length;
+
+for(let i = 0; i < spectrum.length; i++)
+{
+let x = map(i,0,spectrum.length,0,width);
+let h = map(spectrum[i],0,255,0,height);
+fill(0,255,0);
+rect(x,height,w,-h);
+
+
+}
+//Sound Amplitude
+
+let level = myAmplitude.getLevel();
+//Graphic
+
+circle(width/2,height/2,level*width*2+50);
+fill(255,0,0);
+
+
+}
+
+
+
+
+
+
+function mousePressed()
+{
+mySound.play();
+}
+
+
+
+
+
+
+</script>
+</body>
+
+</html>

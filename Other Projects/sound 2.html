@@ -1,0 +1,62 @@
+<!doctype html>
+
+<html>
+
+<head>
+<title>Sound</title>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js" integrity="sha512-w1Bktzax55ZbjW5Mqjz8+mKz4KqRjEUU35Dpq/ath29yskKqIGwNIHiFNp03m/OiJWDXvdQ1/g6aV+l4PeVO7Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/addons/p5.sound.js" integrity="sha512-U2sgwrFhl+Tgx9iGH9h5Ba2WyIjyCes+D0prtIFw3a0V+/fkaeL5Cd/VjyPHno9kUPE1rnNhBGTyvtZsfJp0xg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+<script>
+
+let mySound1;
+let mySound2;
+
+function draw()
+{
+background(200);
+line(width/2,0,width/2,height);
+
+}
+
+function setup()
+{
+createCanvas(400,400);
+mySound1.playMode('restart');
+mySound2.setLoop(true);
+
+}
+function preload()
+{
+mySound1 = loadSound("monster.mp3");
+mySound2 = loadSound("spooky.mp3");
+}
+
+function mousePressed()
+{
+if (mouseX<width/2)
+{
+mySound1.setVolume(map(mouseY,height,0,0,1));
+mySound1.play();
+mySound1.rate(map(mouseX,0,width/2,0,2));
+
+}
+else {
+mySound2.setVolume(map(mouseY,height,0,0,1));
+mySound2.play();
+mySound2.rate(map(mouseX,width/2,width,0,2));
+}
+}
+
+
+
+
+
+
+</script>
+</body>
+
+</html>

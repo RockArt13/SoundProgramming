@@ -1,0 +1,65 @@
+<!doctype html>
+
+<html>
+
+<head>
+<title>Sound</title>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js" integrity="sha512-w1Bktzax55ZbjW5Mqjz8+mKz4KqRjEUU35Dpq/ath29yskKqIGwNIHiFNp03m/OiJWDXvdQ1/g6aV+l4PeVO7Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/addons/p5.sound.js" integrity="sha512-U2sgwrFhl+Tgx9iGH9h5Ba2WyIjyCes+D0prtIFw3a0V+/fkaeL5Cd/VjyPHno9kUPE1rnNhBGTyvtZsfJp0xg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+<script>
+let osc;
+
+function setup()
+{
+createCanvas(400,400);
+
+ osc = new p5.Oscillator("sine");
+// env = new p5.Envelope(0.3, 1, 0.7, 0.1);
+}
+
+function draw()
+{
+background(200);
+fill (255,0,0);
+if(mouseIsPressed)
+{
+circle(mouseX, mouseY, 50);
+let myFreq = map(mouseX, 0, width, 20, 5000);
+osc.freq(myFreq);
+
+let myAmp = map(mouseY, height, 0,0,1);
+osc.amp(myAmp);
+
+}
+
+}
+function mousePressed()
+{
+
+
+//osc.freq(midiToFreq(noteNr));
+osc.start();
+// print(myFreq);
+//env.play(osc);
+
+
+//noteNr++;
+
+
+
+}
+
+function mouseReleased()
+{
+osc.stop();
+
+}
+
+</script>
+</body>
+
+</html>

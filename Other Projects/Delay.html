@@ -1,0 +1,66 @@
+<!doctype html>
+
+<html>
+
+<head>
+<title>Sound</title>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js" integrity="sha512-w1Bktzax55ZbjW5Mqjz8+mKz4KqRjEUU35Dpq/ath29yskKqIGwNIHiFNp03m/OiJWDXvdQ1/g6aV+l4PeVO7Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/addons/p5.sound.js" integrity="sha512-U2sgwrFhl+Tgx9iGH9h5Ba2WyIjyCes+D0prtIFw3a0V+/fkaeL5Cd/VjyPHno9kUPE1rnNhBGTyvtZsfJp0xg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+<script>
+
+let posX;
+let speedX;
+
+let myDelay;
+
+function preload()
+{
+mySound = loadSound("walking.mp3");
+
+}
+
+    
+function setup()
+{
+createCanvas(400,400);
+posX = width/2;
+speedX = 5;
+
+//Sound
+
+myDelay= new p5.Delay();
+mySound.connect(myDelay);
+myDelay.feedback(0.5);
+myDelay.delayTime(0.1);
+}
+
+    
+function draw()
+{
+background(0);
+fill(255);
+let rectHeight = constrain(mouseY,150, 400);
+rect(0,0,width,rectHeight);
+posX+=speedX;
+let diameter = 50;
+myDelay.delayTime(map(rectHeight,150,400,0.5,0.5));
+myDelay.feedback(map(rectHeight,150,400,0.5,0.9));
+
+if(posX>width-(diameter/2) || posX <0+diameter/2)
+{
+speedX = -speedX;
+mySound.play();
+}
+fill(255,0,0)
+circle(posX,100,diameter);
+
+}
+
+</script>
+</body>
+
+</html>
