@@ -43,3 +43,6 @@ Comment the code to explain the additions made.
 # Comments
 This is an ended project.
 
+## Play
+Play the game here: https://rockart13.itch.io/pingpong
+
